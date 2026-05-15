@@ -9,38 +9,300 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RecursosRouteImport } from './routes/recursos'
+import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as IaJuridicaRouteImport } from './routes/ia-juridica'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppUsuariosRouteImport } from './routes/app.usuarios'
+import { Route as AppTarefasRouteImport } from './routes/app.tarefas'
+import { Route as AppPrazosRouteImport } from './routes/app.prazos'
+import { Route as AppPeticoesRouteImport } from './routes/app.peticoes'
+import { Route as AppDocumentosRouteImport } from './routes/app.documentos'
+import { Route as AppConfiguracoesRouteImport } from './routes/app.configuracoes'
+import { Route as AppCasosRouteImport } from './routes/app.casos'
+import { Route as AppAlertasRouteImport } from './routes/app.alertas'
+import { Route as AppCasosIdRouteImport } from './routes/app.casos.$id'
 
+const RecursosRoute = RecursosRouteImport.update({
+  id: '/recursos',
+  path: '/recursos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IaJuridicaRoute = IaJuridicaRouteImport.update({
+  id: '/ia-juridica',
+  path: '/ia-juridica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppUsuariosRoute = AppUsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTarefasRoute = AppTarefasRouteImport.update({
+  id: '/tarefas',
+  path: '/tarefas',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPrazosRoute = AppPrazosRouteImport.update({
+  id: '/prazos',
+  path: '/prazos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPeticoesRoute = AppPeticoesRouteImport.update({
+  id: '/peticoes',
+  path: '/peticoes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDocumentosRoute = AppDocumentosRouteImport.update({
+  id: '/documentos',
+  path: '/documentos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConfiguracoesRoute = AppConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCasosRoute = AppCasosRouteImport.update({
+  id: '/casos',
+  path: '/casos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAlertasRoute = AppAlertasRouteImport.update({
+  id: '/alertas',
+  path: '/alertas',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCasosIdRoute = AppCasosIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AppCasosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/ia-juridica': typeof IaJuridicaRoute
+  '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
+  '/recursos': typeof RecursosRoute
+  '/app/alertas': typeof AppAlertasRoute
+  '/app/casos': typeof AppCasosRouteWithChildren
+  '/app/configuracoes': typeof AppConfiguracoesRoute
+  '/app/documentos': typeof AppDocumentosRoute
+  '/app/peticoes': typeof AppPeticoesRoute
+  '/app/prazos': typeof AppPrazosRoute
+  '/app/tarefas': typeof AppTarefasRoute
+  '/app/usuarios': typeof AppUsuariosRoute
+  '/app/': typeof AppIndexRoute
+  '/app/casos/$id': typeof AppCasosIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/ia-juridica': typeof IaJuridicaRoute
+  '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
+  '/recursos': typeof RecursosRoute
+  '/app/alertas': typeof AppAlertasRoute
+  '/app/casos': typeof AppCasosRouteWithChildren
+  '/app/configuracoes': typeof AppConfiguracoesRoute
+  '/app/documentos': typeof AppDocumentosRoute
+  '/app/peticoes': typeof AppPeticoesRoute
+  '/app/prazos': typeof AppPrazosRoute
+  '/app/tarefas': typeof AppTarefasRoute
+  '/app/usuarios': typeof AppUsuariosRoute
+  '/app': typeof AppIndexRoute
+  '/app/casos/$id': typeof AppCasosIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/ia-juridica': typeof IaJuridicaRoute
+  '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
+  '/recursos': typeof RecursosRoute
+  '/app/alertas': typeof AppAlertasRoute
+  '/app/casos': typeof AppCasosRouteWithChildren
+  '/app/configuracoes': typeof AppConfiguracoesRoute
+  '/app/documentos': typeof AppDocumentosRoute
+  '/app/peticoes': typeof AppPeticoesRoute
+  '/app/prazos': typeof AppPrazosRoute
+  '/app/tarefas': typeof AppTarefasRoute
+  '/app/usuarios': typeof AppUsuariosRoute
+  '/app/': typeof AppIndexRoute
+  '/app/casos/$id': typeof AppCasosIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/contato'
+    | '/faq'
+    | '/ia-juridica'
+    | '/login'
+    | '/planos'
+    | '/recursos'
+    | '/app/alertas'
+    | '/app/casos'
+    | '/app/configuracoes'
+    | '/app/documentos'
+    | '/app/peticoes'
+    | '/app/prazos'
+    | '/app/tarefas'
+    | '/app/usuarios'
+    | '/app/'
+    | '/app/casos/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/ia-juridica'
+    | '/login'
+    | '/planos'
+    | '/recursos'
+    | '/app/alertas'
+    | '/app/casos'
+    | '/app/configuracoes'
+    | '/app/documentos'
+    | '/app/peticoes'
+    | '/app/prazos'
+    | '/app/tarefas'
+    | '/app/usuarios'
+    | '/app'
+    | '/app/casos/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/contato'
+    | '/faq'
+    | '/ia-juridica'
+    | '/login'
+    | '/planos'
+    | '/recursos'
+    | '/app/alertas'
+    | '/app/casos'
+    | '/app/configuracoes'
+    | '/app/documentos'
+    | '/app/peticoes'
+    | '/app/prazos'
+    | '/app/tarefas'
+    | '/app/usuarios'
+    | '/app/'
+    | '/app/casos/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  ContatoRoute: typeof ContatoRoute
+  FaqRoute: typeof FaqRoute
+  IaJuridicaRoute: typeof IaJuridicaRoute
+  LoginRoute: typeof LoginRoute
+  PlanosRoute: typeof PlanosRoute
+  RecursosRoute: typeof RecursosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/recursos': {
+      id: '/recursos'
+      path: '/recursos'
+      fullPath: '/recursos'
+      preLoaderRoute: typeof RecursosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ia-juridica': {
+      id: '/ia-juridica'
+      path: '/ia-juridica'
+      fullPath: '/ia-juridica'
+      preLoaderRoute: typeof IaJuridicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +310,126 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/usuarios': {
+      id: '/app/usuarios'
+      path: '/usuarios'
+      fullPath: '/app/usuarios'
+      preLoaderRoute: typeof AppUsuariosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/tarefas': {
+      id: '/app/tarefas'
+      path: '/tarefas'
+      fullPath: '/app/tarefas'
+      preLoaderRoute: typeof AppTarefasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/prazos': {
+      id: '/app/prazos'
+      path: '/prazos'
+      fullPath: '/app/prazos'
+      preLoaderRoute: typeof AppPrazosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/peticoes': {
+      id: '/app/peticoes'
+      path: '/peticoes'
+      fullPath: '/app/peticoes'
+      preLoaderRoute: typeof AppPeticoesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/documentos': {
+      id: '/app/documentos'
+      path: '/documentos'
+      fullPath: '/app/documentos'
+      preLoaderRoute: typeof AppDocumentosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/configuracoes': {
+      id: '/app/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/app/configuracoes'
+      preLoaderRoute: typeof AppConfiguracoesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/casos': {
+      id: '/app/casos'
+      path: '/casos'
+      fullPath: '/app/casos'
+      preLoaderRoute: typeof AppCasosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/alertas': {
+      id: '/app/alertas'
+      path: '/alertas'
+      fullPath: '/app/alertas'
+      preLoaderRoute: typeof AppAlertasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/casos/$id': {
+      id: '/app/casos/$id'
+      path: '/$id'
+      fullPath: '/app/casos/$id'
+      preLoaderRoute: typeof AppCasosIdRouteImport
+      parentRoute: typeof AppCasosRoute
+    }
   }
 }
 
+interface AppCasosRouteChildren {
+  AppCasosIdRoute: typeof AppCasosIdRoute
+}
+
+const AppCasosRouteChildren: AppCasosRouteChildren = {
+  AppCasosIdRoute: AppCasosIdRoute,
+}
+
+const AppCasosRouteWithChildren = AppCasosRoute._addFileChildren(
+  AppCasosRouteChildren,
+)
+
+interface AppRouteChildren {
+  AppAlertasRoute: typeof AppAlertasRoute
+  AppCasosRoute: typeof AppCasosRouteWithChildren
+  AppConfiguracoesRoute: typeof AppConfiguracoesRoute
+  AppDocumentosRoute: typeof AppDocumentosRoute
+  AppPeticoesRoute: typeof AppPeticoesRoute
+  AppPrazosRoute: typeof AppPrazosRoute
+  AppTarefasRoute: typeof AppTarefasRoute
+  AppUsuariosRoute: typeof AppUsuariosRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAlertasRoute: AppAlertasRoute,
+  AppCasosRoute: AppCasosRouteWithChildren,
+  AppConfiguracoesRoute: AppConfiguracoesRoute,
+  AppDocumentosRoute: AppDocumentosRoute,
+  AppPeticoesRoute: AppPeticoesRoute,
+  AppPrazosRoute: AppPrazosRoute,
+  AppTarefasRoute: AppTarefasRoute,
+  AppUsuariosRoute: AppUsuariosRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  ContatoRoute: ContatoRoute,
+  FaqRoute: FaqRoute,
+  IaJuridicaRoute: IaJuridicaRoute,
+  LoginRoute: LoginRoute,
+  PlanosRoute: PlanosRoute,
+  RecursosRoute: RecursosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
