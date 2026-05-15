@@ -19,7 +19,7 @@ export const Route = createFileRoute("/app/casos/$id")({
     return { caseItem: c };
   },
   head: ({ loaderData }) => ({
-    meta: [{ title: `${loaderData.caseItem.name} — V&N` }],
+    meta: [{ title: `${loaderData?.caseItem.name ?? "Caso"} — V&N` }],
   }),
   component: CaseDetail,
 });
