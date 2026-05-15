@@ -19,7 +19,9 @@ import logo from "@/assets/logo-horizontal.png";
 import logoCircular from "@/assets/logo-circular.png";
 import { cn } from "@/lib/utils";
 
-const nav = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+
+const nav: NavItem[] = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/app/casos", label: "Casos", icon: Briefcase },
   { to: "/app/prazos", label: "Prazos", icon: CalendarClock },
@@ -29,7 +31,7 @@ const nav = [
   { to: "/app/usuarios", label: "Usuários", icon: Users },
   { to: "/app/alertas", label: "Alertas", icon: Bell },
   { to: "/app/configuracoes", label: "Configurações", icon: Settings },
-] as const;
+];
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [openMobile, setOpenMobile] = useState(false);
