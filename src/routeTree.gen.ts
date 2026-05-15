@@ -9,8 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RecursosRouteImport } from './routes/recursos'
+import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as IaJuridicaRouteImport } from './routes/ia-juridica'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RecursosRoute = RecursosRouteImport.update({
+  id: '/recursos',
+  path: '/recursos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IaJuridicaRoute = IaJuridicaRouteImport.update({
+  id: '/ia-juridica',
+  path: '/ia-juridica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +55,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/ia-juridica': typeof IaJuridicaRoute
+  '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
+  '/recursos': typeof RecursosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/ia-juridica': typeof IaJuridicaRoute
+  '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
+  '/recursos': typeof RecursosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/ia-juridica': typeof IaJuridicaRoute
+  '/login': typeof LoginRoute
+  '/planos': typeof PlanosRoute
+  '/recursos': typeof RecursosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/ia-juridica'
+    | '/login'
+    | '/planos'
+    | '/recursos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/ia-juridica'
+    | '/login'
+    | '/planos'
+    | '/recursos'
+  id:
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/ia-juridica'
+    | '/login'
+    | '/planos'
+    | '/recursos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContatoRoute: typeof ContatoRoute
+  FaqRoute: typeof FaqRoute
+  IaJuridicaRoute: typeof IaJuridicaRoute
+  LoginRoute: typeof LoginRoute
+  PlanosRoute: typeof PlanosRoute
+  RecursosRoute: typeof RecursosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/recursos': {
+      id: '/recursos'
+      path: '/recursos'
+      fullPath: '/recursos'
+      preLoaderRoute: typeof RecursosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ia-juridica': {
+      id: '/ia-juridica'
+      path: '/ia-juridica'
+      fullPath: '/ia-juridica'
+      preLoaderRoute: typeof IaJuridicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +177,23 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContatoRoute: ContatoRoute,
+  FaqRoute: FaqRoute,
+  IaJuridicaRoute: IaJuridicaRoute,
+  LoginRoute: LoginRoute,
+  PlanosRoute: PlanosRoute,
+  RecursosRoute: RecursosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
