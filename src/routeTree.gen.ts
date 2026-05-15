@@ -15,7 +15,10 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as IaJuridicaRouteImport } from './routes/ia-juridica'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppCasosRouteImport } from './routes/app.casos'
 
 const RecursosRoute = RecursosRouteImport.update({
   id: '/recursos',
@@ -47,20 +50,38 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCasosRoute = AppCasosRouteImport.update({
+  id: '/casos',
+  path: '/casos',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/ia-juridica': typeof IaJuridicaRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/recursos': typeof RecursosRoute
+  '/app/casos': typeof AppCasosRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,27 +91,35 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/recursos': typeof RecursosRoute
+  '/app/casos': typeof AppCasosRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/ia-juridica': typeof IaJuridicaRoute
   '/login': typeof LoginRoute
   '/planos': typeof PlanosRoute
   '/recursos': typeof RecursosRoute
+  '/app/casos': typeof AppCasosRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/app'
     | '/contato'
     | '/faq'
     | '/ia-juridica'
     | '/login'
     | '/planos'
     | '/recursos'
+    | '/app/casos'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,19 +129,25 @@ export interface FileRouteTypes {
     | '/login'
     | '/planos'
     | '/recursos'
+    | '/app/casos'
+    | '/app'
   id:
     | '__root__'
     | '/'
+    | '/app'
     | '/contato'
     | '/faq'
     | '/ia-juridica'
     | '/login'
     | '/planos'
     | '/recursos'
+    | '/app/casos'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   FaqRoute: typeof FaqRoute
   IaJuridicaRoute: typeof IaJuridicaRoute
@@ -165,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -172,11 +214,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/casos': {
+      id: '/app/casos'
+      path: '/casos'
+      fullPath: '/app/casos'
+      preLoaderRoute: typeof AppCasosRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppCasosRoute: typeof AppCasosRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppCasosRoute: AppCasosRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   ContatoRoute: ContatoRoute,
   FaqRoute: FaqRoute,
   IaJuridicaRoute: IaJuridicaRoute,
